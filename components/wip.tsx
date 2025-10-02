@@ -13,7 +13,7 @@ export default function HomeWIP() {
 
         const handleTimeUpdate = () => {
             if (video.duration - video.currentTime < 0.2) {
-                video.currentTime = 0.05 // rewind slightly before start to avoid flash
+                video.currentTime = 0.05
                 video.play()
             }
         }
@@ -24,15 +24,17 @@ export default function HomeWIP() {
 
     return (
         <div className="flex flex-col min-h-screen bg-white">
-            {/* Navbar */}
             <nav className="bg-white shadow-sm sticky top-0 z-50">
                 <div className="container mx-auto px-6 py-4 flex justify-between items-center">
                     <div className="flex items-center gap-2">
-                        <svg className="w-8 h-8 text-amber-500" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-                        </svg>
+                        <img
+                            src="/bc_logo.png"
+                            alt="BC Global Logo"
+                            className="w-12 h-12 object-contain"
+                        />
                         <span className="text-2xl font-bold text-gray-900">BC Global</span>
                     </div>
+
                     <div className="hidden md:flex gap-8 items-center">
                         <a href="#" className="text-amber-500 font-medium">Home</a>
                         <a href="#" className="text-gray-700 hover:text-gray-900">Onsite Solar</a>
@@ -46,23 +48,19 @@ export default function HomeWIP() {
                 </div>
             </nav>
 
-            {/* Hero Section with Video Background */}
             <div className="relative h-screen w-full overflow-hidden">
-                {/* Dark Overlay */}
                 <div className="absolute inset-0 bg-black/40 z-10"></div>
 
-                {/* Video Background */}
                 <video
                     ref={videoRef}
                     className="absolute inset-0 w-full h-full object-cover"
                     autoPlay
                     muted
                     playsInline
-                    loop={false} // disable native loop to control ourselves
+                    loop={false}
                     src="/videos/solar_hero.mp4"
                     poster="/placeholder.svg?height=1080&width=1920"
                 >
-                    {/* fallback */}
                     <source src="#" type="video/mp4" />
                     <img
                         src="/placeholder.svg?height=1080&width=1920"
@@ -71,7 +69,6 @@ export default function HomeWIP() {
                     />
                 </video>
 
-                {/* Content with Animations */}
                 <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center">
                     <div className={`max-w-3xl transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
@@ -81,15 +78,18 @@ export default function HomeWIP() {
                             Empowering businesses with sustainable energy solutions that reduce costs and environmental impact
                         </p>
 
-                        {/* Work in Progress Card with Animation */}
                         <div className="bg-white/95 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-white/20 transform hover:scale-105 transition-transform duration-300">
                             <div className="flex items-center gap-4 mb-6">
-                                {/* Animated Solar Icon */}
-                                <div className="relative w-16 h-16">
+                                <div className="relative w-16 h-16 flex items-center justify-center">
                                     <div className="absolute inset-0 border-4 border-amber-500/30 rounded-full animate-ping"></div>
-                                    <svg className="relative w-16 h-16 text-amber-500 animate-spin-slow" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-                                    </svg>
+                                    <img
+                                        src="/hammer.svg"
+                                        alt="Hammer"
+                                        className="relative w-14 h-14 animate-hammer"
+                                        style={{
+                                            filter: 'invert(54%) sepia(78%) saturate(1542%) hue-rotate(0deg) brightness(95%) contrast(92%)'
+                                        }}
+                                    />
                                 </div>
 
                                 <div>
@@ -106,7 +106,6 @@ export default function HomeWIP() {
                                 We're building something amazing for you. Our team is working hard to enhance your experience with cutting-edge solar solutions.
                             </p>
 
-                            {/* Animated Progress Bar */}
                             <div className="bg-gray-200 rounded-full h-3 overflow-hidden mb-4">
                                 <div className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 h-full rounded-full animate-progress shadow-lg"></div>
                             </div>
@@ -123,7 +122,6 @@ export default function HomeWIP() {
                             </div>
                         </div>
 
-                        {/* Floating Animation Elements */}
                         <div className="absolute top-20 right-10 w-20 h-20 bg-amber-500/20 rounded-full blur-2xl animate-float"></div>
                         <div className="absolute bottom-32 left-20 w-32 h-32 bg-amber-400/20 rounded-full blur-3xl animate-float-delayed"></div>
                     </div>
@@ -135,6 +133,15 @@ export default function HomeWIP() {
           0% { width: 0%; }
           50% { width: 80%; }
           100% { width: 0%; }
+        }
+
+        @keyframes hammer {
+          0%, 100% {
+            transform: rotate(-50deg);
+          }
+          50% {
+            transform: rotate(-80deg);
+          }
         }
 
         @keyframes spin-slow {
@@ -154,6 +161,11 @@ export default function HomeWIP() {
 
         .animate-progress {
           animation: progress 2.5s ease-in-out infinite;
+        }
+
+        .animate-hammer {
+          animation: hammer 0.6s ease-in-out infinite;
+          transform-origin: 50% 50%;
         }
 
         .animate-spin-slow {
